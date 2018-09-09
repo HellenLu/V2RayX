@@ -7,82 +7,168 @@
 
 #import "ServerProfile.h"
 
-#define N_Securities 4
 
 @implementation ServerProfile
 
 - (ServerProfile*)init {
     self = [super init];
     if (self) {
-        // use v2ray public server as default
-        [self setAddress:@"v2ray.cool"];
-        [self setPort:@10086];
-        [self setUserId:@"23ad6b10-8d1a-40f7-8ad0-e3e35cd38297"];
-        [self setAlterId:@64];
+        [self setAddress:@"server.cc"];
+        [self setPort:10086];
+        [self setUserId:@"00000000-0000-0000-0000-000000000000"];
+        [self setAlterId:64];
+        [self setLevel:0];
         [self setRemark:@"test server"];
-        [self setAllowPassive:[NSNumber numberWithBool:false]];//does not allow passive as default
-        [self setSecurity:@0]; //use aes-128-cfb as default
-        [self setNetwork:@0];
+        [self setSecurity:auto_];
+        [self setNetwork:tcp];
+        [self setSendThrough:@"0.0.0.0"];
+        [self setStreamSettings:@{
+                                  @"security": @"none",
+                                  @"tlsSettings": @{
+                                          @"serverName": @"server.cc",
+                                          @"allowInsecure": [NSNumber numberWithBool:NO]
+                                          },
+                                  @"tcpSettings": @{
+                                          @"header": @{
+                                                  @"type": @"none"
+                                                  }
+                                          },
+                                  @"kcpSettings": @{
+                                          @"mtu": @1350,
+                                          @"tti": @20,
+                                          @"uplinkCapacity": @5,
+                                          @"downlinkCapacity": @20,
+                                          @"congestion": [NSNumber numberWithBool:NO],
+                                          @"readBufferSize": @1,
+                                          @"writeBufferSize": @1,
+                                          @"header": @{
+                                                  @"type": @"none"
+                                                  }
+                                          },
+                                  @"wsSettings": @{
+                                          @"path": @"",
+                                          @"headers": @{
+                                                  @"Host": @"server.cc"
+                                                  }
+                                          },
+                                  @"httpSettings": @{
+                                            @"host": @[@"server.cc"],
+                                            @"path": @""
+                                        }
+                                  }];
+        [self setMuxSettings:@{
+                               @"enabled": [NSNumber numberWithBool:NO],
+                               @"concurrency": @8
+                               }];
     }
     return self;
 }
 
 - (NSString*)description {
-    return [[self dictionaryForm] description];
+    return [[self outboundProfile] description];
 }
 
-- (NSDictionary*)dictionaryForm {
-    return @{@"address": address != nil ? [address stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] : @"",
-             @"port": port != nil ? port : @0,
-             @"userId": userId != nil ? [userId stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]: @"",
-             @"alterId": alterId != nil ? alterId : @0,
-             @"remark": remark != nil ? remark : @"",
-             @"allowPassive": allowPassive != nil ? allowPassive : [NSNumber numberWithBool:false],
-             @"security": security != nil ? security : @0,
-             @"network": network != nil ? network : @0};
-}
-
-
-
-- (NSDictionary*)v2rayConfigWithRules:(BOOL)rules
-{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//    generate config template
-    NSMutableDictionary *config = [NSMutableDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:rules?@"config-sample-rules":@"config-sample" ofType:@"plist"]];
-    config[@"inbound"][@"port"] = [userDefaults objectForKey:@"localPort"];
-    config[@"inbound"][@"listen"] = [[userDefaults objectForKey:@"shareOverLan"] boolValue] ? @"0.0.0.0" : @"127.0.0.1";
-    config[@"inboundDetour"][0][@"listen"] = [[userDefaults objectForKey:@"shareOverLan"] boolValue] ? @"0.0.0.0" : @"127.0.0.1";
-    config[@"inboundDetour"][0][@"port"] = [userDefaults objectForKey:@"httpPort"];
-    config[@"inbound"][@"settings"][@"udp"] = config[@"udpSupport"];
-    config[@"inbound"][@"allowPassive"] = [self allowPassive];
-    if ([userDefaults objectForKey:@"mux"] != nil) {
-        config[@"outbound"][@"mux"] = [userDefaults objectForKey:@"mux"];
++ (NSArray*)profilesFromJson:(NSDictionary*)outboundJson {
+    if (![outboundJson[@"protocol"] isKindOfClass:[NSString class]]
+        || ![outboundJson[@"protocol"] isEqualToString:@"vmess"] ) {
+        return @[];
     }
-    config[@"outbound"][@"settings"][@"vnext"][0][@"address"] = self.address;
-    config[@"outbound"][@"settings"][@"vnext"][0][@"port"] = self.port;
-    config[@"outbound"][@"settings"][@"vnext"][0][@"users"][0][@"id"] = self.userId;
-    config[@"outbound"][@"settings"][@"vnext"][0][@"users"][0][@"alterId"] = self.alterId;
-    config[@"outbound"][@"settings"][@"vnext"][0][@"users"][0][@"security"] = @[@"aes-128-cfb", @"aes-128-gcm", @"chacha20-poly1305", @"auto"][self.security.integerValue % N_Securities];
-    NSMutableDictionary* streamSettings = [[userDefaults objectForKey:@"transportSettings"] mutableCopy];
-    streamSettings[@"network"] = @[@"tcp", @"kcp", @"ws"][self.network.integerValue % 3];
-    streamSettings[@"security"] = [[userDefaults objectForKey:@"useTLS"] boolValue] ? @"tls" : @"none";
-    streamSettings[@"tlsSettings"] = [userDefaults objectForKey:@"tlsSettings"];
-    config[@"outbound"][@"streamSettings"] = streamSettings;
-    NSArray* dnsArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"dns"] componentsSeparatedByString:@","];
-    if ([dnsArray count] > 0) {
-        config[@"dns"][@"servers"] = dnsArray;
+    NSMutableArray* profiles = [[NSMutableArray alloc] init];
+    NSDictionary *netWorkDict = @{@"tcp": @0, @"kcp": @1, @"ws":@2, @"http":@3 };
+    NSDictionary *securityDict = @{@"aes-128-cfb":@0, @"aes-128-gcm":@1, @"chacha20-poly1305":@2, @"auto":@3, @"none":@4};
+    NSString* sendThrough = nilCoalescing(outboundJson[@"sendThrough"], @"0.0.0.0");
+    if (![[outboundJson valueForKeyPath:@"settings.vnext"] isKindOfClass:[NSArray class]]) {
+        return @[];
+    }
+    for (NSDictionary* vnext in [outboundJson valueForKeyPath:@"settings.vnext"]) {
+        ServerProfile* profile = [[ServerProfile alloc] init];
+        profile.address = nilCoalescing(vnext[@"address"], @"127.0.0.1");
+        profile.remark = nilCoalescing(vnext[@"remark"], @"");
+        profile.port = [vnext[@"port"] unsignedIntegerValue];
+        if (![vnext[@"users"] isKindOfClass:[NSArray class]] || [vnext[@"users"] count] == 0) {
+            continue;
+        }
+        profile.userId = nilCoalescing(vnext[@"users"][0][@"id"], @"23ad6b10-8d1a-40f7-8ad0-e3e35cd38287");
+        profile.alterId = [vnext[@"users"][0][@"alterId"] unsignedIntegerValue];
+        profile.level = [vnext[@"users"][0][@"level"] unsignedIntegerValue];
+        profile.security = [securityDict[vnext[@"users"][0][@"security"]] unsignedIntegerValue];
+        if (outboundJson[@"streamSettings"] != nil) {
+            profile.streamSettings = outboundJson[@"streamSettings"];
+            profile.network = [netWorkDict[outboundJson[@"streamSettings"][@"network"]] unsignedIntegerValue];
+        }
+        if (outboundJson[@"mux"] != nil) {
+            profile.muxSettings = outboundJson[@"mux"];
+        }
+        profile.sendThrough = sendThrough;
+        [profiles addObject:profile];
+    }
+    return profiles;
+}
+
++ (ServerProfile* _Nullable )readFromAnOutboundDic:(NSDictionary*)outDict {
+    NSArray *allProfiles = [self profilesFromJson:outDict];
+    if ([allProfiles count] > 0) {
+        return allProfiles[0];
     } else {
-        config[@"dns"][@"servers"] = @[@"localhost"];
+        return NULL;
     }
-    return config;
+}
+
+-(ServerProfile*)deepCopy {
+    ServerProfile* aCopy = [[ServerProfile alloc] init];
+    aCopy.address = [NSString stringWithString:nilCoalescing(self.address, @"")];
+    aCopy.port = self.port;
+    aCopy.userId = [NSString stringWithString:nilCoalescing(self.userId, @"")];
+    aCopy.alterId = self.alterId;
+    aCopy.level = self.level;
+    aCopy.remark = [NSString stringWithString:nilCoalescing(self.remark, @"")];
+    aCopy.security = self.security;
+    aCopy.network = self.network;
+    aCopy.sendThrough = [NSString stringWithString:nilCoalescing(self.sendThrough, @"")];
+    aCopy.streamSettings = [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:self.streamSettings]];
+    aCopy.muxSettings = [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:self.muxSettings]];
+    return aCopy;
+}
+
+- (NSMutableDictionary*)outboundProfile {
+    NSMutableDictionary* fullStreamSettings = [NSMutableDictionary dictionaryWithDictionary:streamSettings];
+    fullStreamSettings[@"network"] = @[@"tcp",@"kcp", @"ws", @"http"][network];
+    NSDictionary* result =
+    @{
+      @"sendThrough": sendThrough,
+      @"protocol": @"vmess",
+      @"settings": [@{
+              @"vnext": @[
+                      @{
+                          @"remark": nilCoalescing(remark, @""),
+                          @"address": nilCoalescing([address stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] , @""),
+                          @"port": [NSNumber numberWithUnsignedInteger:port],
+                          @"users": @[
+                                  @{
+                                      @"id": userId != nil ? [userId stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]: @"",
+                                      @"alterId": [NSNumber numberWithUnsignedInteger:alterId],
+                                      @"security": @[@"aes-128-cfb", @"aes-128-gcm", @"chacha20-poly1305", @"auto", @"none"][security],
+                                      @"level": [NSNumber numberWithUnsignedInteger:level]
+                                      }
+                                  ]
+                          }
+                      ]
+              } mutableCopy],
+      @"streamSettings": fullStreamSettings,
+      @"mux": muxSettings,
+      };
+    return [result mutableCopy];
 }
 
 @synthesize address;
 @synthesize port;
 @synthesize userId;
 @synthesize alterId;
+@synthesize level;
 @synthesize remark;
 @synthesize security;
-@synthesize allowPassive;
 @synthesize network;
+@synthesize sendThrough;
+@synthesize muxSettings;
+@synthesize streamSettings;
 @end

@@ -18,8 +18,6 @@
 		9504C0CF1C662DE300352520 /* v2rayx_sysconf in Resources */ = {isa = PBXBuildFile; fileRef = 9504C0C61C662DB400352520 /* v2rayx_sysconf */; };
 		9504C0D11C66373400352520 /* install_helper.sh in Resources */ = {isa = PBXBuildFile; fileRef = 9504C0D01C662E0800352520 /* install_helper.sh */; };
 		9504C0D41C66511B00352520 /* ServerProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 9504C0D31C66511B00352520 /* ServerProfile.m */; };
-		950F82321D9C01820066CB3A /* config-sample-rules.plist in Resources */ = {isa = PBXBuildFile; fileRef = 950F82311D9C01820066CB3A /* config-sample-rules.plist */; };
-		953B60581DB3F6B700D40654 /* v2ray in CopyFiles */ = {isa = PBXBuildFile; fileRef = 953B60571DB3F6B700D40654 /* v2ray */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		9565E28B1DB25C010082658C /* transportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9565E28A1DB25C010082658C /* transportWindow.xib */; };
 		9577E1B21C6B065E00093BD3 /* GCDWebServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9577E1951C6B065D00093BD3 /* GCDWebServer.m */; };
 		9577E1B31C6B065E00093BD3 /* GCDWebServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9577E1971C6B065D00093BD3 /* GCDWebServerConnection.m */; };
@@ -36,8 +34,14 @@
 		9577E1BE1C6B065E00093BD3 /* GCDWebServerStreamedResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 9577E1B11C6B065E00093BD3 /* GCDWebServerStreamedResponse.m */; };
 		95A143CC1C87FCDC008756B9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A143CA1C87FC6E008756B9 /* Cocoa.framework */; };
 		95E524CB1C674CC80008BB12 /* simple.pac in Resources */ = {isa = PBXBuildFile; fileRef = 95E524CA1C674CC80008BB12 /* simple.pac */; };
+		9D3CEE6F209E070F0077CCFE /* customizedConfigWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D3CEE6E209E070F0077CCFE /* customizedConfigWindow.xib */; };
+		9D5EAC151FDCD70300C14B46 /* geoip.dat in Resources */ = {isa = PBXBuildFile; fileRef = 9D5EAC101FDCD54700C14B46 /* geoip.dat */; };
+		9D5EAC161FDCD70300C14B46 /* geosite.dat in Resources */ = {isa = PBXBuildFile; fileRef = 9D5EAC0F1FDCD54600C14B46 /* geosite.dat */; };
+		9D5EAC171FDCD70300C14B46 /* v2ctl in Resources */ = {isa = PBXBuildFile; fileRef = 9D5EAC0E1FDCD54600C14B46 /* v2ctl */; };
+		9D5EAC181FDCD70300C14B46 /* v2ray in Resources */ = {isa = PBXBuildFile; fileRef = 953B60571DB3F6B700D40654 /* v2ray */; };
 		9D7109611E0F43BD008A6362 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 9D7109601E0F43BD008A6362 /* Credits.rtf */; };
 		9D7DFE541EBEC947001FECBD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7DFE531EBEC947001FECBD /* main.m */; };
+		9DA4A84120C14178000FF35D /* tcp_http_header_example.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9DA4A84020C14178000FF35D /* tcp_http_header_example.txt */; };
 		9DB4FE951F205BEB00CCEE5F /* config-sample.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DB4FE941F205BEB00CCEE5F /* config-sample.plist */; };
 /* End PBXBuildFile section */
 
@@ -60,16 +64,6 @@
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 1;
-		};
-		955671B21D9B427500137ACF /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 6;
-			files = (
-				953B60581DB3F6B700D40654 /* v2ray in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		9D7DFE4F1EBEC947001FECBD /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -99,7 +93,6 @@
 		9504C0D01C662E0800352520 /* install_helper.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = install_helper.sh; sourceTree = "<group>"; };
 		9504C0D21C66511B00352520 /* ServerProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerProfile.h; sourceTree = "<group>"; };
 		9504C0D31C66511B00352520 /* ServerProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerProfile.m; sourceTree = "<group>"; };
-		950F82311D9C01820066CB3A /* config-sample-rules.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "config-sample-rules.plist"; sourceTree = "<group>"; };
 		953B60551DB3F65A00D40654 /* dlcore.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = dlcore.sh; sourceTree = "<group>"; };
 		953B60571DB3F6B700D40654 /* v2ray */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = v2ray; path = "../v2ray-core-bin/v2ray"; sourceTree = "<group>"; };
 		9565E28A1DB25C010082658C /* transportWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = transportWindow.xib; sourceTree = "<group>"; };
@@ -134,10 +127,17 @@
 		95862BD41DB2862E00F4A9CA /* compilefromsource.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = compilefromsource.sh; sourceTree = "<group>"; };
 		95A143CA1C87FC6E008756B9 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		95E524CA1C674CC80008BB12 /* simple.pac */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = simple.pac; sourceTree = "<group>"; };
+		9D3CEE6E209E070F0077CCFE /* customizedConfigWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = customizedConfigWindow.xib; sourceTree = "<group>"; };
+		9D5EAC0E1FDCD54600C14B46 /* v2ctl */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = v2ctl; path = "v2ray-core-bin/v2ctl"; sourceTree = SOURCE_ROOT; };
+		9D5EAC0F1FDCD54600C14B46 /* geosite.dat */ = {isa = PBXFileReference; lastKnownFileType = file; name = geosite.dat; path = "v2ray-core-bin/geosite.dat"; sourceTree = SOURCE_ROOT; };
+		9D5EAC101FDCD54700C14B46 /* geoip.dat */ = {isa = PBXFileReference; lastKnownFileType = file; name = geoip.dat; path = "v2ray-core-bin/geoip.dat"; sourceTree = SOURCE_ROOT; };
 		9D7109601E0F43BD008A6362 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		9D7DFE511EBEC947001FECBD /* jsonplist */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jsonplist; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D7DFE531EBEC947001FECBD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9DA398B5209ECED400784947 /* sysconf_version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sysconf_version.h; sourceTree = "<group>"; };
+		9DA4A84020C14178000FF35D /* tcp_http_header_example.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tcp_http_header_example.txt; sourceTree = "<group>"; };
 		9DB4FE941F205BEB00CCEE5F /* config-sample.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "config-sample.plist"; sourceTree = "<group>"; };
+		9DBF3AA3213E1921008C7249 /* MutableDeepCopying.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MutableDeepCopying.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,9 +198,11 @@
 				9504C0811C662C3000352520 /* Assets.xcassets */,
 				9504C0831C662C3000352520 /* MainMenu.xib */,
 				9504C08C1C662C9100352520 /* ConfigWindow.xib */,
+				9D3CEE6E209E070F0077CCFE /* customizedConfigWindow.xib */,
 				9565E28A1DB25C010082658C /* transportWindow.xib */,
 				9504C08E1C662CBF00352520 /* ConfigWindowController.h */,
 				9504C08F1C662CBF00352520 /* ConfigWindowController.m */,
+				9DBF3AA3213E1921008C7249 /* MutableDeepCopying.h */,
 				9504C0D21C66511B00352520 /* ServerProfile.h */,
 				9504C0D31C66511B00352520 /* ServerProfile.m */,
 				9504C0861C662C3000352520 /* Info.plist */,
@@ -212,12 +214,12 @@
 		9504C07E1C662C3000352520 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				950F82311D9C01820066CB3A /* config-sample-rules.plist */,
 				9DB4FE941F205BEB00CCEE5F /* config-sample.plist */,
+				9DA4A84020C14178000FF35D /* tcp_http_header_example.txt */,
 				95E524CA1C674CC80008BB12 /* simple.pac */,
 				9504C0D01C662E0800352520 /* install_helper.sh */,
 				953B60551DB3F65A00D40654 /* dlcore.sh */,
-				953B60571DB3F6B700D40654 /* v2ray */,
+				9D5EAC111FDCD54F00C14B46 /* v2ray-core */,
 				9D7109601E0F43BD008A6362 /* Credits.rtf */,
 				9504C07F1C662C3000352520 /* main.m */,
 			);
@@ -228,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				9504C0C81C662DB500352520 /* main.m */,
+				9DA398B5209ECED400784947 /* sysconf_version.h */,
 			);
 			path = v2rayx_sysconf;
 			sourceTree = "<group>";
@@ -302,6 +305,17 @@
 			path = V2RayX;
 			sourceTree = "<group>";
 		};
+		9D5EAC111FDCD54F00C14B46 /* v2ray-core */ = {
+			isa = PBXGroup;
+			children = (
+				9D5EAC101FDCD54700C14B46 /* geoip.dat */,
+				9D5EAC0F1FDCD54600C14B46 /* geosite.dat */,
+				9D5EAC0E1FDCD54600C14B46 /* v2ctl */,
+				953B60571DB3F6B700D40654 /* v2ray */,
+			);
+			name = "v2ray-core";
+			sourceTree = "<group>";
+		};
 		9D7DFE521EBEC947001FECBD /* jsonplist */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,9 +333,9 @@
 			buildPhases = (
 				9504C0741C662C3000352520 /* Sources */,
 				9504C0751C662C3000352520 /* Frameworks */,
+				9DB94D77209D273A0001E9DD /* Run Script */,
+				953B60541DB3E31D00D40654 /* Run Script */,
 				9504C0761C662C3000352520 /* Resources */,
-				953B60541DB3E31D00D40654 /* ShellScript */,
-				955671B21D9B427500137ACF /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -373,7 +387,7 @@
 		9504C0701C662C3000352520 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Project V2Ray";
 				TargetAttributes = {
 					9504C0771C662C3000352520 = {
@@ -413,11 +427,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D5EAC151FDCD70300C14B46 /* geoip.dat in Resources */,
+				9D5EAC161FDCD70300C14B46 /* geosite.dat in Resources */,
+				9D3CEE6F209E070F0077CCFE /* customizedConfigWindow.xib in Resources */,
+				9D5EAC171FDCD70300C14B46 /* v2ctl in Resources */,
+				9D5EAC181FDCD70300C14B46 /* v2ray in Resources */,
 				9DB4FE951F205BEB00CCEE5F /* config-sample.plist in Resources */,
-				950F82321D9C01820066CB3A /* config-sample-rules.plist in Resources */,
 				95E524CB1C674CC80008BB12 /* simple.pac in Resources */,
 				9504C0D11C66373400352520 /* install_helper.sh in Resources */,
 				9504C0CF1C662DE300352520 /* v2rayx_sysconf in Resources */,
+				9DA4A84120C14178000FF35D /* tcp_http_header_example.txt in Resources */,
 				9504C0821C662C3000352520 /* Assets.xcassets in Resources */,
 				9D7109611E0F43BD008A6362 /* Credits.rtf in Resources */,
 				9504C0851C662C3000352520 /* MainMenu.xib in Resources */,
@@ -429,18 +448,33 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		953B60541DB3E31D00D40654 /* ShellScript */ = {
+		953B60541DB3E31D00D40654 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = $SRCROOT/V2RayX/dlcore.sh;
+			shellScript = "\"$SRCROOT\"/V2RayX/dlcore.sh";
+		};
+		9DB94D77209D273A0001E9DD /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -515,14 +549,22 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -560,14 +602,22 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -14,13 +14,17 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
+                <outlet property="editPacMenu" destination="3NY-51-bgh" id="dgA-Xq-mKn"/>
                 <outlet property="enabelV2rayItem" destination="I9I-uu-xak" id="b3P-ct-RqE"/>
                 <outlet property="globalModeItem" destination="12u-76-Ytb" id="RA8-m2-Iv6"/>
                 <outlet property="manualModeItem" destination="P4q-kj-6fs" id="5XH-9p-w3e"/>
-                <outlet property="pacModeItem" destination="Cm9-3e-L2z" id="TlL-GV-776"/>
+                <outlet property="pacListMenu" destination="25R-TF-TBx" id="xGh-bJ-AGG"/>
+                <outlet property="pacModeItem" destination="Cm9-3e-L2z" id="IvE-nJ-dW0"/>
+                <outlet property="pacsItem" destination="Cm9-3e-L2z" id="RVg-X8-RBp"/>
                 <outlet property="serverListMenu" destination="pPD-dn-4h0" id="6sH-L6-Uzx"/>
                 <outlet property="serversItem" destination="3wi-Co-2Kd" id="kKi-8l-dDJ"/>
                 <outlet property="statusBarMenu" destination="yZm-2L-r3v" id="3iW-vb-TOn"/>
+                <outlet property="stupidSepy" destination="lQU-65-XjU" id="hMg-f2-sa1"/>
                 <outlet property="v2rayRulesItem" destination="bUi-AV-IfA" id="p4V-ny-gh7"/>
                 <outlet property="v2rayStatusItem" destination="EFa-yl-fQC" id="z3V-zp-jw7"/>
             </connections>
@@ -696,6 +700,7 @@
                 </menuItem>
                 <menuItem title="PAC Mode" id="Cm9-3e-L2z">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="pac file" id="yno-KX-HOj"/>
                     <connections>
                         <action selector="choosePacMode:" target="Voe-Tx-rLC" id="0yC-jW-pRH"/>
                     </connections>
@@ -723,10 +728,16 @@
                         <action selector="showConfigWindow:" target="Voe-Tx-rLC" id="jVU-tA-mPz"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Edit pac file" id="3NY-51-bgh">
+                <menuItem title="View log" id="5Vg-qU-2V2">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="editPac:" target="Voe-Tx-rLC" id="4jX-Hv-SpU"/>
+                        <action selector="viewLog:" target="Voe-Tx-rLC" id="6j0-df-F3G"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="View current config.json" id="C53-wG-wMg">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="viewConfigJson:" target="Voe-Tx-rLC" id="8EX-Wb-G5H"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="1ve-pA-4fu"/>
@@ -734,6 +745,18 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="copyExportCmd:" target="Voe-Tx-rLC" id="OMz-Lv-Wmr"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Reset pac file" id="oGZ-uP-dny">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="resetPac:" target="Voe-Tx-rLC" id="WUw-A2-aU5"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Authorize v2rayx_sysconf..." id="mOc-zi-Beb">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="authorizeV2sys:" target="Voe-Tx-rLC" id="ycW-j1-Sv7"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="YAD-DW-T91"/>
@@ -753,7 +776,7 @@
                 <menuItem title="Quit" id="8f2-cF-RxH">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="terminate:" target="-1" id="SZu-Iy-jKu"/>
+                        <action selector="terminate:" target="-2" id="Clz-zf-6So"/>
                     </connections>
                 </menuItem>
             </items>
@@ -762,5 +785,13 @@
         <menu title="ServerList" id="pPD-dn-4h0">
             <point key="canvasLocation" x="445" y="279.5"/>
         </menu>
+        <menuItem title="Edit pac file" id="3NY-51-bgh">
+            <modifierMask key="keyEquivalentModifierMask"/>
+            <connections>
+                <action selector="editPac:" target="Voe-Tx-rLC" id="4jX-Hv-SpU"/>
+            </connections>
+        </menuItem>
+        <menuItem isSeparatorItem="YES" id="lQU-65-XjU"/>
+        <menu id="25R-TF-TBx" userLabel="Pac List Menu"/>
     </objects>
 </document>

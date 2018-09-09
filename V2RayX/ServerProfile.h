@@ -6,16 +6,37 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AppDelegate.h"
+
+typedef enum SecurityType : NSUInteger {
+    aes_128_cfb,
+    aes_128_gcm,
+    chacha20_poly130,
+    auto_,
+    none
+} SecurityType;
+
+typedef enum NetWorkType : NSUInteger {
+    tcp,
+    kcp,
+    ws,
+    http,
+} NetWorkType;
 
 @interface ServerProfile : NSObject
-- (NSDictionary*)dictionaryForm;
-- (NSDictionary*)v2rayConfigWithRules:(BOOL)rules;
+- (NSMutableDictionary*)outboundProfile;
++ (ServerProfile* _Nullable )readFromAnOutboundDic:(NSDictionary*)outDict;
++ (NSArray*)profilesFromJson:(NSDictionary*)outboundJson;
+-(ServerProfile*)deepCopy;
 @property (nonatomic) NSString* address;
-@property (nonatomic) NSNumber* port;
+@property (nonatomic) NSUInteger port;
 @property (nonatomic) NSString* userId;
-@property (nonatomic) NSNumber* alterId;
+@property (nonatomic) NSUInteger alterId;
+@property (nonatomic) NSUInteger level;
 @property (nonatomic) NSString* remark;
-@property (nonatomic) NSNumber* allowPassive;
-@property (nonatomic) NSNumber* security; //0:aes-128-cfb, 1:aes-128-gcm, 2:chacha20-poly1305
-@property (nonatomic) NSNumber* network; //0:tcp, 1:kcp, 2:ws
+@property (nonatomic) SecurityType security;
+@property (nonatomic) NetWorkType network;
+@property (nonatomic) NSString* sendThrough;
+@property (nonatomic) NSDictionary* streamSettings; // except network type.
+@property (nonatomic) NSDictionary* muxSettings;
 @end

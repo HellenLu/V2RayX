@@ -8,15 +8,9 @@
 #import <Cocoa/Cocoa.h>
 #import "ServerProfile.h"
 
-@protocol ConfigWindowControllerDelegate <NSObject>
-
-@optional
-- (void)configurationDidChange;
-- (NSDictionary*)readDefaultsAsDictionary;
-
-@end
-
 @interface ConfigWindowController : NSWindowController <NSTableViewDataSource, NSTableViewDelegate>
+- (IBAction)chooseNetwork:(NSPopUpButton *)sender;
+@property (weak) IBOutlet NSPopUpButton *networkButton;
 - (IBAction)addRemoveServer:(id)sender;
 - (IBAction)cancel:(id)sender;
 - (IBAction)okSave:(id)sender;
@@ -29,8 +23,12 @@
 @property (weak) IBOutlet NSTextField *alterIdField;
 @property (weak) IBOutlet NSTextField *dnsField;
 @property (weak) IBOutlet NSButton *globalTransportButton;
+@property (weak) IBOutlet NSPopUpButton *logLevelButton;
+@property (weak) IBOutlet NSMenu *importFromJsonMenu;
 
 @property (weak) IBOutlet NSWindow* transportWindow;
+@property (weak) IBOutlet NSWindow* cusConfigWindow;
+
 //kcp fields
 @property (weak) IBOutlet NSTextField *kcpMtuField;
 @property (weak) IBOutlet NSTextField *kcpTtiField;
@@ -41,11 +39,16 @@
 @property (weak) IBOutlet NSPopUpButton *kcpCongestionButton;
 @property (weak) IBOutlet NSPopUpButton *kcpHeaderTypeButton;
 //tcp fields
-@property (weak) IBOutlet NSButton *tcpCrButton;
-@property (weak) IBOutlet NSPopUpButton *tcpHeaderTypeButton;
+@property (weak) IBOutlet NSButton *tcpHeaderCusButton;
+@property (unsafe_unretained) IBOutlet NSTextView *tcpHdField;
+
 //ws fields
-@property (weak) IBOutlet NSButton *wsCrButton;
 @property (weak) IBOutlet NSTextField *wsPathField;
+@property (unsafe_unretained) IBOutlet NSTextView *wsHeaderField;
+//https fields
+@property (weak) IBOutlet NSTextField *httpHostsField;
+@property (weak) IBOutlet NSTextField *httpPathField;
+
 //tls fields
 @property (weak) IBOutlet NSButton *tlsUseButton;
 @property (weak) IBOutlet NSButton *tlsAiButton;
@@ -55,13 +58,27 @@
 @property (weak) IBOutlet NSButton *muxEnableButton;
 @property (weak) IBOutlet NSTextField *muxConcurrencyField;
 
+//proxy fields
+@property (weak) IBOutlet NSTextField *proxyAddressField;
+@property (weak) IBOutlet NSTextField *proxyPortField;
 
+//cus config file fields
+@property (weak) IBOutlet NSTableView *cusProfileTable;
+@property (weak) IBOutlet NSTextField *checkLabel;
+
+
+@property AppDelegate* appDelegate;
 @property (nonatomic) ServerProfile* selectedProfile;
-@property NSInteger selectedServerIndex;
-@property NSInteger localPort;
-@property NSInteger httpPort;
-@property BOOL udpSupport;
-@property BOOL shareOverLan;
-@property (nonatomic, weak) NSString* dnsString;
-@property (nonatomic, weak) id<ConfigWindowControllerDelegate> delegate;
+@property (nonatomic) NSInteger logLevel;
+@property (nonatomic) NSInteger selectedServerIndex;
+@property (nonatomic) NSInteger selectedCusServerIndex;
+@property (nonatomic) NSInteger localPort;
+@property (nonatomic) NSInteger httpPort;
+@property (nonatomic) BOOL udpSupport;
+@property (nonatomic) BOOL shareOverLan;
+@property (nonatomic) NSString* dnsString;
+@property (nonatomic) NSMutableArray *profiles;
+@property (nonatomic) NSMutableArray *cusProfiles;
+
+
 @end
